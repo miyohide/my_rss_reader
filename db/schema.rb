@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_115713) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_120249) do
+  create_table "entries", force: :cascade do |t|
+    t.integer "feed_id", null: false
+    t.string "title", null: false
+    t.string "link", null: false
+    t.text "body", null: false
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_entries_on_feed_id"
+  end
+
   create_table "feeds", force: :cascade do |t|
     t.string "title", limit: 100, null: false
     t.string "endpoint", limit: 250, null: false
@@ -25,4 +36,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_115713) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "entries", "feeds"
 end
