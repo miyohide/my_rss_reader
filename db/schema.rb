@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_06_095909) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_115713) do
+  create_table "feeds", force: :cascade do |t|
+    t.string "title", limit: 100, null: false
+    t.string "endpoint", limit: 250, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
