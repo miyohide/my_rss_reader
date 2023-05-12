@@ -192,6 +192,8 @@ GEM
     reline (0.3.3)
       io-console (~> 0.5)
     rexml (3.2.5)
+    rss (0.2.9)
+      rexml
     rubocop (1.50.2)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -282,6 +284,7 @@ DEPENDENCIES
   rails (~> 7.0.3, >= 7.0.3.1)
   rails_semantic_logger (~> 4.11)
   rambulance
+  rss
   rubocop-rails
   selenium-webdriver
   simplecov
