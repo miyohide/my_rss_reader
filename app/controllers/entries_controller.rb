@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.all
+    @entries_with_feedid_key = Entry.all.group_by { |e| e.feed_id }
   end
 
   # GET /entries/1 or /entries/1.json

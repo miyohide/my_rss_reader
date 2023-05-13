@@ -3,26 +3,27 @@
 <h1>Entries</h1>
 
 <div id="entries">
-  <table>
-    <thead>
-      <tr>
-        <th>タイトル</th>
-        <th>概要</th>
-        <th>リンク</th>
-        <th>発行日</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @entries.each do |entry| %>
+  <% @entries_with_feedid_key.each do |feed_id, entries| %>
+    <%= feed_id %>
+    <table>
+      <thead>
         <tr>
-          <td><%= entry.title %></td>
-          <td><%= entry.body %></td>
-          <td><%= link_to "リンク", entry.link %></td>
-          <td><%= entry.published_at %></td>
+          <th>タイトル</th>
+          <th>概要</th>
+          <th>リンク</th>
+          <th>発行日</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% entries.each do |entry| %>
+          <tr>
+            <td><%= entry.title %></td>
+            <td><%= entry.body %></td>
+            <td><%= link_to "リンク", entry.link %></td>
+            <td><%= entry.published_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
-
-<%= link_to "New entry", new_entry_path %>
