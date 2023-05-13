@@ -3,12 +3,26 @@
 <h1>Entries</h1>
 
 <div id="entries">
-  <% @entries.each do |entry| %>
-    <%= render entry %>
-    <p>
-      <%= link_to "Show this entry", entry %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>概要</th>
+        <th>リンク</th>
+        <th>発行日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.title %></td>
+          <td><%= entry.body %></td>
+          <td><%= link_to "リンク", entry.link %></td>
+          <td><%= entry.published_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New entry", new_entry_path %>
