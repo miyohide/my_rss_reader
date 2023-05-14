@@ -3,8 +3,8 @@
 <h1>Entries</h1>
 
 <div id="entries">
-  <% @entries_with_feedid_key.each do |feed_id, entries| %>
-    <%= feed_id %>
+  <% @entries_with_feed_key.each do |feed, entries| %>
+    <h2><%= feed.title %></h2>
     <table>
       <thead>
         <tr>
