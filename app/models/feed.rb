@@ -11,14 +11,17 @@ class Feed < ApplicationRecord
 
   def execute
     parsed_xml.items.map do |item|
-      Entry.create(
-        feed: self,
-        title: item.title,
-        body: strip_tags(item.description).truncate(200),
-        published_at: item.pubDate,
-        link: item.link
-      )
+      if last_updated_at.present? && item.pubDate > last_updated_at
+        Entry.create(
+          feed: self,
+          title: item.title,
+          body: strip_tags(item.description).truncate(200),
+          published_at: item.pubDate,
+          link: item.link
+        )
+      end
     end
+    update_column(:last_updated_at, Time.now)
   end
 
   def strip_tags(text)
