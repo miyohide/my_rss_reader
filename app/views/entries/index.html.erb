@@ -10,16 +10,14 @@
         <tr>
           <th>タイトル</th>
           <th>概要</th>
-          <th>リンク</th>
           <th>発行日</th>
         </tr>
       </thead>
       <tbody>
         <% entries.each do |entry| %>
           <tr>
-            <td><%= entry.title %></td>
+            <td><%= link_to entry.title, entry.link %></td>
             <td><%= entry.body %></td>
-            <td><%= link_to "リンク", entry.link %></td>
             <td><%= entry.published_at %></td>
           </tr>
         <% end %>
