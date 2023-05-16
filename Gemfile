@@ -90,3 +90,5 @@ gem 'cssbundling-rails', '~> 1.1'
 gem 'rails_semantic_logger', '~> 4.11'
 
 gem 'rss'
+
+gem 'kaminari'
