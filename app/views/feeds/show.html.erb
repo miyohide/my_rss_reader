@@ -2,6 +2,27 @@
 
 <%= render @feed %>
 
+<hr />
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>概要</th>
+      <th>発行日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feed.entries.each do |entry| %>
+      <tr>
+        <td><%= link_to entry.title, entry.link %></td>
+        <td><%= entry.body %></td>
+        <td><%= entry.published_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <div>
   <%= link_to "Edit this feed", edit_feed_path(@feed) %> |
   <%= link_to "Back to feeds", feeds_path %>
