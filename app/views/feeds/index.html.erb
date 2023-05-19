@@ -16,7 +16,10 @@
         <tr>
           <td><%= feed.title %></td>
           <td><%= link_to feed.endpoint, feed.endpoint %></td>
-          <td><%= link_to "Show this feed", feed %></td>
+          <td>
+            <%= link_to "Show this feed", feed %>
+            <%= link_to "Entries", "#" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
