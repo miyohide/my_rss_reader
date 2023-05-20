@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: %i[ show edit update destroy ]
+  before_action :set_feed, only: %i[ show edit update destroy entry_update ]
 
   # GET /feeds or /feeds.json
   def index
@@ -55,6 +55,11 @@ class FeedsController < ApplicationController
       format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def entry_update
+    @feed.execute
+    redirect_to feed_url(@feed), notice: "Execute entry update"
   end
 
   private
