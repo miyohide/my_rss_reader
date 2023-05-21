@@ -18,6 +18,7 @@
           <td><%= link_to feed.endpoint, feed.endpoint %></td>
           <td>
             <%= link_to "Show this feed", feed %>
+            <%= link_to "Update feed", entry_update_feed_path(feed), data: {turbo_method: :post} %>
           </td>
         </tr>
       <% end %>
