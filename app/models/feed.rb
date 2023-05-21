@@ -2,7 +2,7 @@ require 'net/http'
 require 'rss'
 
 class Feed < ApplicationRecord
-  has_many :entries
+  has_many :entries, -> { order(published_at: :desc) }
 
   def parsed_xml
     xml = Net::HTTP.get(URI.parse(endpoint))
