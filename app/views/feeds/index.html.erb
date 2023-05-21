@@ -8,6 +8,7 @@
       <tr>
         <th>タイトル</th>
         <th>エンドポイント</th>
+        <th>RSS更新日時</th>
         <th></th>
       </tr>
     </thead>
@@ -16,6 +17,7 @@
         <tr>
           <td><%= feed.title %></td>
           <td><%= link_to feed.endpoint, feed.endpoint %></td>
+          <td><%= feed.last_updated_at %></td>
           <td>
             <%= link_to "Show this feed", feed %>
             <%= link_to "Update feed", entry_update_feed_path(feed), data: {turbo_method: :post} %>
