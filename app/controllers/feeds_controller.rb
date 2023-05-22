@@ -8,6 +8,7 @@ class FeedsController < ApplicationController
 
   # GET /feeds/1 or /feeds/1.json
   def show
+    @entries = @feed.entries.page(params[:page])
   end
 
   # GET /feeds/new
