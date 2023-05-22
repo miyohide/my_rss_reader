@@ -27,4 +27,8 @@ class Feed < ApplicationRecord
   def strip_tags(text)
     ActionController::Base.helpers.strip_tags(text)
   end
+
+  def latest10_entries
+    entries.take(10)
+  end
 end
