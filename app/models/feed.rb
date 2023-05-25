@@ -31,4 +31,9 @@ class Feed < ApplicationRecord
   def latest10_entries
     entries.take(10)
   end
+
+  def self.by_id_latest_entries
+    all.reduce({}) { |h, f| h[f.id] = f.latest10_entries; h}
+  end
+
 end
