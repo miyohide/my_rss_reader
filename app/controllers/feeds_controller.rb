@@ -4,6 +4,7 @@ class FeedsController < ApplicationController
   # GET /feeds or /feeds.json
   def index
     @feeds = Feed.includes(:entries).all
+    @feed_with_entries = Feed.by_id_latest_entries
   end
 
   # GET /feeds/1 or /feeds/1.json
