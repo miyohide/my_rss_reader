@@ -21,7 +21,7 @@
           <td><%= feed.last_updated_at %></td>
           <td>
             <ul>
-              <% feed.latest10_entries.each do |e| %>
+              <% @feed_with_entries[feed.id].each do |e| %>
                 <li><%= e.title %>
               <% end %>
             </ul>
