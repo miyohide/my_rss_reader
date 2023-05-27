@@ -22,7 +22,7 @@
           <td>
             <ul>
               <% @feed_with_entries[feed.id].each do |e| %>
-                <li><%= e.title %>
+                <li><%= link_to e.title, e.link %>
               <% end %>
             </ul>
 
