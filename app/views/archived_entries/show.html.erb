@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @archived_entry %>
+
+<div>
+  <%= link_to "Edit this archived entry", edit_archived_entry_path(@archived_entry) %> |
+  <%= link_to "Back to archived entries", archived_entries_path %>
+
+  <%= button_to "Destroy this archived entry", @archived_entry, method: :delete %>
+</div>

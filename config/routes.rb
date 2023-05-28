@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :archived_entries
   resources :entries
   resources :feeds do
     member do

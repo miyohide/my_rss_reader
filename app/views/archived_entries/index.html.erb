@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Archived entries</h1>
+
+<div id="archived_entries">
+  <% @archived_entries.each do |archived_entry| %>
+    <%= render archived_entry %>
+    <p>
+      <%= link_to "Show this archived entry", archived_entry %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New archived entry", new_archived_entry_path %>
