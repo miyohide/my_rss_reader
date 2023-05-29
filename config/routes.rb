@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :archived_entries
-  resources :entries
+  resources :entries do
+    member do
+      put :save_to_archive
+    end
+  end
   resources :feeds do
     member do
       post :entry_update
