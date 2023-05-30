@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: %i[ show edit update destroy ]
+  before_action :set_entry, only: %i[ show edit update destroy save_to_archive]
 
   # GET /entries or /entries.json
   def index
@@ -55,6 +55,14 @@ class EntriesController < ApplicationController
       format.html { redirect_to entries_url, notice: "Entry was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # PUT /entries/1/save_to_archive
+  def save_to_archive
+    ArchivedEntry.new(feed_id: @entry.feed_id, title: @entry.title, body: @entry.body, link: @entry.link, published_at: @entry.published_at).save
+    @entry.destroy
+
+    redirect_to entries_url, notice: "Entry was successfully archived."
   end
 
   private
