@@ -10,6 +10,7 @@
       <th>タイトル</th>
       <th>概要</th>
       <th>発行日</th>
+      <th>すべて既読にする</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
         <td><%= link_to entry.title, entry.link %></td>
         <td><%= entry.body %></td>
         <td><%= entry.published_at %></td>
+        <td><%= link_to "既読にする", save_to_archive_entry_path(entry), data: {turbo_method: :put} %></td>
       </tr>
     <% end %>
   </tbody>
