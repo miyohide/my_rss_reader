@@ -59,10 +59,14 @@ class EntriesController < ApplicationController
 
   # PUT /entries/1/save_to_archive
   def save_to_archive
-    ArchivedEntry.new(feed_id: @entry.feed_id, title: @entry.title, body: @entry.body, link: @entry.link, published_at: @entry.published_at).save
-    @entry.destroy
-
-    redirect_to entries_url, notice: "Entry was successfully archived."
+    ActiveRecord::Base.transaction do
+      ae = ArchivedEntry.create(feed_id: @entry.feed_id, title: @entry.title, body: @entry.body, link: @entry.link, published_at: @entry.published_at)
+      @entry.destroy
+      raise ActiveRecord::RecordInvalid unless @ae.persisted?
+      redirect_to entries_url, notice: "Entry was successfully archived."
+    rescue ActiveRecord::RecordInvalid => exception
+      redirect_to entries_url, notice: "Entry was failed archived."
+    end
   end
 
   private
