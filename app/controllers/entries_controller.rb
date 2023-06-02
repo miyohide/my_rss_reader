@@ -61,7 +61,7 @@ class EntriesController < ApplicationController
   def save_to_archive
     begin
       ActiveRecord::Base.transaction do
-        ae = ArchivedEntry.create(feed_id: nil, title: nil, body: @entry.body, link: @entry.link, published_at: @entry.published_at)
+        ae = ArchivedEntry.create(feed_id: @entry.feed.id, title: @entry.title, body: @entry.body, link: @entry.link, published_at: @entry.published_at)
         @entry.destroy
         raise ActiveRecord::RecordInvalid unless ae.persisted?
         redirect_to entries_url, alert: "Entry was successfully archived."
