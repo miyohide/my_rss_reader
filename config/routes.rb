@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       post :entry_update
     end
   end
+
+  post 'feeds/:feed_id/entries/:entry_id/archived', to: 'feeds#archived'
   # resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
