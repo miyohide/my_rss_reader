@@ -64,6 +64,14 @@ class FeedsController < ApplicationController
     redirect_to feed_url(@feed), notice: "Execute entry update"
   end
 
+  def archived
+    e = Entry.find(params[:entry_id])
+    ArchivedEntry.create(feed_id: @feed.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
+    # @entry.destroy
+
+    redirect_to feed_url(@feed), notice: "Entry was successfully archived."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feed
