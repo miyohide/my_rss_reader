@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: %i[ show edit update destroy entry_update ]
+  before_action :set_feed, only: %i[ show edit update destroy entry_update archived]
 
   # GET /feeds or /feeds.json
   def index
