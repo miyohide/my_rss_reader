@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  post 'feeds/:feed_id/entries/:entry_id/archived', to: 'feeds#archived', as: 'feed_archived'
+  put 'feeds/:feed_id/entries/:entry_id/archived', to: 'feeds#archived', as: 'feed_archived'
   # resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
