@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: %i[ show edit update destroy entry_update archived]
+  before_action :set_feed, only: %i[ show edit update destroy entry_update]
 
   # GET /feeds or /feeds.json
   def index
@@ -65,11 +65,12 @@ class FeedsController < ApplicationController
   end
 
   def archived
+    f = Feed.find(params[:feed_id])
     e = Entry.find(params[:entry_id])
-    ArchivedEntry.create(feed_id: @feed.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
-    # @entry.destroy
+    ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
+    e.destroy
 
-    redirect_to feed_url(@feed), notice: "Entry was successfully archived."
+    redirect_to feed_url(f), notice: "Entry was successfully archived."
   end
 
   private
