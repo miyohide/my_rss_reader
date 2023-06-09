@@ -65,12 +65,18 @@ class FeedsController < ApplicationController
   end
 
   def archived
-    f = Feed.find(params[:feed_id])
-    e = Entry.find(params[:entry_id])
-    ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
-    e.destroy
+    begin
+      ActiveRecord::Base.transaction do
+        f = Feed.find(params[:feed_id])
+        e = Entry.find(params[:entry_id])
+        ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
+        e.destroy
 
-    redirect_to feed_url(f), notice: "Entry was successfully archived."
+        redirect_to feed_url(f), notice: "Entry was successfully archived."
+      end
+    rescue ActiveRecord::RecordInvalid => exception
+      redirect_to entries_url, notice: "Entry was failed archived."
+    end
   end
 
   private
