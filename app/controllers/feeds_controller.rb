@@ -79,6 +79,22 @@ class FeedsController < ApplicationController
     end
   end
 
+  def archivedall
+    f = Feed.find(params[:feed_id])
+    begin
+      ActiveRecord::Base.transaction do
+        params[:target_ids].each do |entity_id|
+          e = Entry.find(entity_id)
+          ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
+          e.destroy
+        end
+        redirect_to feed_url(f), notice: "All entries archived."
+      end
+    rescue => exception
+      redirect_to feeds_url, notice: "Entry was failed archived."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feed
