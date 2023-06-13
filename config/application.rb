@@ -22,9 +22,11 @@ module RailsForAzureWebapps
     # config.eager_load_paths << Rails.root.join("extras")
 
     # semantic_loggerの設定
-    # JSON形式で出力する
-    #config.rails_semantic_logger.format = :json
-    #config.semantic_logger.add_appender(file_name: File.join("log", "#{Rails.env}.json"), formatter: :json)
+    # 開発環境などはJSON形式にすると見にくいのでRails標準に近づける
+    config.rails_semantic_logger.semantic = false
+    config.rails_semantic_logger.started = true
+    config.rails_semantic_logger.processing = true
+    config.rails_semantic_logger.rendered = true
 
     # 入力フォームのバリデーションエラーのときに挿入されるタグをカスタマイズする
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| content_tag :span, html_tag, class: "my_field_with_errors" }
