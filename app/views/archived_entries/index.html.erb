@@ -3,12 +3,24 @@
 <h1>Archived entries</h1>
 
 <div id="archived_entries">
-  <% @archived_entries.each do |archived_entry| %>
-    <%= render archived_entry %>
-    <p>
-      <%= link_to "Show this archived entry", archived_entry %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>エンドポイント</th>
+        <th>リンク</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @archived_entries.each do |archived_entry| %>
+        <tr>
+          <td><%= archived_entry.title %></td>
+          <td><%= link_to archived_entry.feed.endpoint, archived_entry.feed.endpoint %></td>
+          <td><%= link_to archived_entry.link, archived_entry.link %></td>
+          <td><%= archived_entry.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New archived entry", new_archived_entry_path %>
