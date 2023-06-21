@@ -3,7 +3,7 @@ class ArchivedEntriesController < ApplicationController
 
   # GET /archived_entries or /archived_entries.json
   def index
-    @archived_entries = ArchivedEntry.all.page(params[:page])
+    @archived_entries = ArchivedEntry.order(published_at: :desc).page(params[:page])
   end
 
   # GET /archived_entries/1 or /archived_entries/1.json
