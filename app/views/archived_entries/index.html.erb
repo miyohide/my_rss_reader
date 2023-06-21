@@ -10,6 +10,7 @@
         <th>エンドポイント</th>
         <th>リンク</th>
         <th>本文</th>
+        <th>発行日</th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
           <td><%= link_to archived_entry.feed.endpoint, archived_entry.feed.endpoint %></td>
           <td><%= link_to archived_entry.link, archived_entry.link %></td>
           <td><%= archived_entry.body %></td>
+          <td><%= archived_entry.published_at %></td>
         </tr>
       <% end %>
     </tbody>
