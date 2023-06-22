@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :archived_entries
+  resources :archived_entries, only: [:index]
   resources :entries do
     member do
       put :save_to_archive
