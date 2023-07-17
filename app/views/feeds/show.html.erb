@@ -10,7 +10,11 @@
       <th>タイトル</th>
       <th>概要</th>
       <th>発行日</th>
-      <th><%= link_to "すべて既読にする", feed_archivedall_path(@feed.id, target_ids: taget_entry_ids(@entries)), data: {turbo_method: :put} %></th>
+      <% if @entries.size > 0 %>
+        <th><%= link_to "すべて既読にする", feed_archivedall_path(@feed.id, target_ids: taget_entry_ids(@entries)), data: {turbo_method: :put} %></th>
+      <% else %>
+        <th>すべて既読にする</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
