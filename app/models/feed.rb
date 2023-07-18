@@ -19,6 +19,14 @@ class Feed < ApplicationRecord
           published_at: item.pubDate,
           link: item.link
         )
+      elsif last_updated_at.nil?
+        Entry.create(
+          feed: self,
+          title: item.title,
+          body: strip_tags(item.description).truncate(200),
+          published_at: item.pubDate,
+          link: item.link
+        )
       end
     end
     update_column(:last_updated_at, Time.now)
