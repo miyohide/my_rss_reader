@@ -24,6 +24,8 @@ class FeedsController < ApplicationController
   # POST /feeds or /feeds.json
   def create
     @feed = Feed.new(feed_params)
+    # last_updated_atに初期値を入れる。あまり昔のデータをいれないために仮に1年前を設定する
+    @feed.last_updated_at = Time.now - 1.year
 
     respond_to do |format|
       if @feed.save
