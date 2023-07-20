@@ -1,13 +1,13 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: %i[ show edit update destroy entry_update]
 
-  # GET /feeds or /feeds.json
+  # GET /feeds
   def index
     @feeds = Feed.includes(:entries).all
     @feed_with_entries = Feed.by_id_latest_entries
   end
 
-  # GET /feeds/1 or /feeds/1.json
+  # GET /feeds/1
   def show
     @entries = @feed.entries.page(params[:page])
   end
@@ -21,7 +21,7 @@ class FeedsController < ApplicationController
   def edit
   end
 
-  # POST /feeds or /feeds.json
+  # POST /feeds
   def create
     @feed = Feed.new(feed_params)
     # last_updated_atに初期値を入れる。あまり昔のデータをいれないために仮に1年前を設定する
@@ -38,7 +38,7 @@ class FeedsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /feeds/1 or /feeds/1.json
+  # PATCH/PUT /feeds/1
   def update
     respond_to do |format|
       if @feed.update(feed_params)
@@ -51,7 +51,7 @@ class FeedsController < ApplicationController
     end
   end
 
-  # DELETE /feeds/1 or /feeds/1.json
+  # DELETE /feeds/1
   def destroy
     @feed.destroy
 
