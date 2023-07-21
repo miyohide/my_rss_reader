@@ -27,27 +27,19 @@ class FeedsController < ApplicationController
     # last_updated_atに初期値を入れる。あまり昔のデータをいれないために仮に1年前を設定する
     @feed.last_updated_at = Time.now - 1.year
 
-    respond_to do |format|
-      if @feed.save
-        format.html { redirect_to feed_url(@feed), notice: "Feed was successfully created." }
-        format.json { render :show, status: :created, location: @feed }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
+    if @feed.save
+      redirect_to feed_url(@feed), notice: "Feed was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /feeds/1
   def update
-    respond_to do |format|
-      if @feed.update(feed_params)
-        format.html { redirect_to feed_url(@feed), notice: "Feed was successfully updated." }
-        format.json { render :show, status: :ok, location: @feed }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
+    if @feed.update(feed_params)
+      redirect_to feed_url(@feed), notice: "Feed was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -55,10 +47,7 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
 
-    respond_to do |format|
-      format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to feeds_url, notice: "Feed was successfully destroyed."
   end
 
   def entry_update
