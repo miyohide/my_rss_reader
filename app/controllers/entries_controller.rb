@@ -1,14 +1,14 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: %i[ show edit update destroy save_to_archive]
 
-  # GET /entries or /entries.json
+  # GET /entries
   def index
     page = params[:page] || 1
     @entries = Entry.includes(:feed).all.order(id: "DESC").page(page)
     @entries_with_feed_key = @entries.group_by { |entry| entry.feed }
   end
 
-  # GET /entries/1 or /entries/1.json
+  # GET /entries/1
   def show
   end
 
@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
   def edit
   end
 
-  # POST /entries or /entries.json
+  # POST /entries
   def create
     @entry = Entry.new(entry_params)
 
@@ -36,7 +36,7 @@ class EntriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /entries/1 or /entries/1.json
+  # PATCH/PUT /entries/1
   def update
     respond_to do |format|
       if @entry.update(entry_params)
@@ -49,7 +49,7 @@ class EntriesController < ApplicationController
     end
   end
 
-  # DELETE /entries/1 or /entries/1.json
+  # DELETE /entries/1
   def destroy
     @entry.destroy
 
