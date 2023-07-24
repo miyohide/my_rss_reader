@@ -4,7 +4,7 @@
 
 <div id="entries">
   <% @entries_with_feed_key.each do |feed, entries| %>
-    <h2><%= feed.title %></h2>
+    <h2><%=link_to feed.title, feed.endpoint %></h2>
     <table class="table">
       <thead>
         <tr>
