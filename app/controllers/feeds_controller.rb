@@ -28,7 +28,7 @@ class FeedsController < ApplicationController
     @feed.last_updated_at = Time.now - 1.year
 
     if @feed.save
-      redirect_to feed_url(@feed), notice: "Feed was successfully created."
+      redirect_to feed_url(@feed), flash: {info: "Feed was successfully created."}
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1
   def update
     if @feed.update(feed_params)
-      redirect_to feed_url(@feed), notice: "Feed was successfully updated."
+      redirect_to feed_url(@feed), flash: {info: "Feed was successfully updated."}
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,12 +47,12 @@ class FeedsController < ApplicationController
   def destroy
     @feed.destroy
 
-    redirect_to feeds_url, notice: "Feed was successfully destroyed."
+    redirect_to feeds_url, flash: {info: "Feed was successfully destroyed."}
   end
 
   def entry_update
     @feed.execute
-    redirect_to feed_url(@feed), notice: "Execute entry update"
+    redirect_to feed_url(@feed), flash: {info: "Execute entry update"}
   end
 
   def archived
@@ -63,10 +63,10 @@ class FeedsController < ApplicationController
         ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
         e.destroy
 
-        redirect_to feed_url(f), notice: "Entry was successfully archived."
+        redirect_to feed_url(f), flash: {info: "Entry was successfully archived."}
       end
     rescue ActiveRecord::RecordInvalid => exception
-      redirect_to entries_url, notice: "Entry was failed archived."
+      redirect_to entries_url, flash: {danger: "Entry was failed archived."}
     end
   end
 
@@ -79,10 +79,10 @@ class FeedsController < ApplicationController
           ArchivedEntry.create(feed_id: f.id, title: e.title, body: e.body, link: e.link, published_at: e.published_at)
           e.destroy
         end
-        redirect_to feed_url(f), notice: "All entries archived."
+        redirect_to feed_url(f), flash: {info: "All entries archived."}
       end
     rescue => exception
-      redirect_to feeds_url, notice: "Entry was failed archived."
+      redirect_to feeds_url, flash: {danger: "Entry was failed archived."}
     end
   end
 
